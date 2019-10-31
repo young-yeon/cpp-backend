@@ -148,7 +148,7 @@ void api(char *text, REQUEST_HEADER head, sqlite3 *DB) {
 			}
 		}
 
-		if (check_no && check_name && check_id && check_memo) {
+		if (check_no || check_name || check_id || check_memo) {
 			sprintf(text, "HTTP/1.1 400 Bad Request\r\n");
 		}
 		else {

@@ -1,7 +1,0 @@
-{
-  "header": [
-    "iostream",
-    "thread",
-    "WinSock2.h"
-  ]
-}

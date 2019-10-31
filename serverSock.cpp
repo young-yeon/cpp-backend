@@ -25,24 +25,19 @@ int serverSocket() {
 	sqlite3 *stuDB;
 	int retv;
 	char *error;
-	char **results;
 	const char *sqlStr;
-	retv = sqlite3_open("student.db", &stuDB);
+	retv = sqlite3_open(":memory:", &stuDB);
 	if (retv) {
 		sqlite3_close(stuDB);
 		return DB_ERROR;
 	}
-	sqlStr = "SELECT COUNT(*) FROM sqlite_master WHERE NAME = 'student_info'";
-	if (sqlite3_get_table(stuDB, sqlStr, &results, NULL, NULL, &error)) {
+
+	sqlStr = "CREATE TABLE student_info"
+		"(no Integer PRIMARY KEY, name text, id Integer, memo text);";
+	if (sqlite3_exec(stuDB, sqlStr, NULL, NULL, &error) != SQLITE_OK) {
 		sqlite3_close(stuDB);
 		sqlite3_free(error);
 		return DB_ERROR;
-	}
-	else {
-		if (atoi(results[1]) == NONE) {
-			sqlite3_close(stuDB);
-			return DB_ERROR;
-		}
 	}
 
 	SOCKET acceptSock[THREAD];

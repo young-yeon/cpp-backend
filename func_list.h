@@ -7,19 +7,19 @@ map<string, string> parser(const string& route);
 
 /*
 * 
-* get (insert)	: params
-* post (insert)	: x-www-form-urlencoded
-* put (update)	: x-www-form-urlencoded
-* delete (drop)	: x-www-form-urlencoded
+* get (select)		: nothing
+* post (insert)		: x-www-form-urlencoded
+* put (update)		: uri-data (/api?no=<int>) / x-www-form-urlencoded
+* delete (delete)	: uri-data (/api?no=<int>)
 *
 * --------------- ROUTE ---------------
-*   /				helloWorld
-*   /nyy			nyy
-*   /insert			insert <GET, POST>
+*   /		helloWorld
+*   /nyy	nyy
+*   /api	insert <GET, POST, PUT, DELETE>
 * -------------------------------------
 *
 */
 
 void helloWorld(char *text);
 void nyy(char *text);
-void insert(char *text, REQUEST_HEADER head, sqlite3 *DB);
+void api(char *text, REQUEST_HEADER head, sqlite3 *DB);

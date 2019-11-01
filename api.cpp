@@ -165,7 +165,7 @@ void api(char *text, REQUEST_HEADER head, sqlite3 *DB) {
 				sprintf(text, "HTTP/1.1 403 Forbidden\r\n");
 			}
 			
-			sprintf(tmp, "{ %s : { \"name\" : \"%s\", \"id\" : %s, \"memo\" : \"%s\"",
+			sprintf(tmp, "{ %s : { \"name\" : \"%s\", \"id\" : %s, \"memo\" : \"%s\"} }",
 				noo, name, id, memo);
 
 			sprintf(text,

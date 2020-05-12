@@ -22,6 +22,9 @@ int serverSocket() {
 		return BIND_FAIL;
 	}
 
+	if (listen(sockListen, ListenQ) == SOCKET_ERROR)
+		return LISTEN_FAIL;
+
 	sqlite3 *stuDB;
 	int retv;
 	char *error;
@@ -43,9 +46,6 @@ int serverSocket() {
 	SOCKET acceptSock[THREAD];
 	int length = sizeof(serverAddress), THREAD_COUNT = 0, status;
 	while (true) {
-		if (listen(sockListen, ListenQ) == SOCKET_ERROR)
-			return LISTEN_FAIL;
-		
 		acceptSock[THREAD_COUNT] = accept(sockListen, (sockaddr *)&clientAddress, &length);
 		
 		if (acceptSock[THREAD_COUNT] < 0)
